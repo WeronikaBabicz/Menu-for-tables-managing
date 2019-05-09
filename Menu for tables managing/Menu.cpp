@@ -88,12 +88,12 @@ void Menu::addItem(MenuItem * menuItem)
 	menuItems.push_back(menuItem);
 }
 
-void Menu::deleteItem(string s_user_command)
+void Menu::deleteItem(string userCommand)
 {
 	bool exists = false;
 	for (int i = 0; i < menuItems.size(); i++)
 	{
-		if (s_user_command == menuItems.at(i)->getCommandId())
+		if (userCommand == menuItems.at(i)->getCommandId())
 		{
 			exists = true;
 			menuItems.erase(menuItems.begin() + i);
