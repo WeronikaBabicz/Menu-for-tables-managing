@@ -148,8 +148,8 @@ void SetTableName::runCommand()
 
 	if ((tableIndex >= 0) && (tableIndex < (*tables).size()))
 	{
-		Table *cTable = (*tables).at(tableIndex);
-		(*cTable).setName(tableName);
+		Table *table = (*tables).at(tableIndex);
+		(*table).setName(tableName);
 	}
 	else
 	{
@@ -197,9 +197,9 @@ void RedefineTable::runCommand()
 
 	if ((copyFromTableIndex >= 0) && (copyFromTableIndex < (*tables).size()) && (copyToTableIndex > 0) && (copyToTableIndex < (*tables).size()))
 	{
-		Table *copyFromTable = (*tables).at(copyFromTableIndex);
-		Table *copyToTable = (*tables).at(copyToTableIndex);
-		(*copyToTable).redefineTableValuesBasedOnOtherTable(*copyFromTable);
+		Table *tableCopyFrom = (*tables).at(copyFromTableIndex);
+		Table *tableCopyTo = (*tables).at(copyToTableIndex);
+		(*tableCopyTo).redefineTableValuesBasedOnOtherTable(*tableCopyFrom);
 
 	}
 	else

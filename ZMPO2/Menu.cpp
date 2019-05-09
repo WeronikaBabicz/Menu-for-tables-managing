@@ -31,9 +31,9 @@ Menu::~Menu()
 
 void Menu::runMenu()
 {
-	string s_user_command;
-	bool b_command_exists = false;
-	while (s_user_command != EXIT_NAME)
+	string userCommand;
+	bool exists = false;
+	while (userCommand != EXIT_NAME)
 	{
 		cout << EQUALS << endl;
 		cout << YOUR_PATH << path << endl;
@@ -41,22 +41,22 @@ void Menu::runMenu()
 		cout <<  name << SPACE << "\t" << OPENING_BRACKET << id << CLOSING_BRACKET << endl;
 		for (int i = 0; i < menuItems.size(); i++)
 		{
-			cout << menuItems.at(i)->getName() << SPACE <<"\t" << OPENING_BRACKET << menuItems.at(i)->getCommand() << CLOSING_BRACKET << endl;
+			cout << menuItems.at(i)->getCommandName() << SPACE <<"\t" << OPENING_BRACKET << menuItems.at(i)->getCommandId() << CLOSING_BRACKET << endl;
 		}
 		cout << EQUALS <<endl << HOW_TO_EXIT_INFO << EXIT_NAME << endl;
 		cout << endl << ENTER_COMMAND_ID << endl;
-		cin >> s_user_command;
+		cin >> userCommand;
 		cout << endl;
 		for (int i = 0; i < menuItems.size(); i++)
 		{
-			if (s_user_command == menuItems.at(i)->getCommand())
+			if (userCommand == menuItems.at(i)->getCommandId())
 			{
-				b_command_exists = true;
+				exists = true;
 				menuItems.at(i)->runMenu();
 			}
 		}
 
-		if (b_command_exists == false && s_user_command != EXIT_NAME)
+		if (exists == false && userCommand != EXIT_NAME)
 		{
 			cout << ERROR_COMMAND_NAME << endl;
 		}
@@ -64,43 +64,43 @@ void Menu::runMenu()
 
 }
 
-string Menu::getName()
+string Menu::getCommandName()
 {
 	return name;
 }
 
-string Menu::getCommand()
+string Menu::getCommandId()
 {
 	return id;
 }
 
-void Menu::addItem(MenuItem * cItem)
+void Menu::addItem(MenuItem * menuItem)
 {
-	cItem->setPath(path + ARROW + cItem->getName());
+	menuItem->setPath(path + ARROW + menuItem->getCommandName());
 	for (int i = 0; i < menuItems.size(); i++)
 	{
-		if (menuItems.at(i)->getName() == cItem->getName() || menuItems.at(i)->getCommand() == cItem->getCommand())
+		if (menuItems.at(i)->getCommandName() == menuItem->getCommandName() || menuItems.at(i)->getCommandId() == menuItem->getCommandId())
 		{
 			cout << ADDING_ERROR << endl;
 			return;
 		}
 	}
-	menuItems.push_back(cItem);
+	menuItems.push_back(menuItem);
 }
 
 void Menu::deleteItem(string s_user_command)
 {
-	bool b_exists = false;
+	bool exists = false;
 	for (int i = 0; i < menuItems.size(); i++)
 	{
-		if (s_user_command == menuItems.at(i)->getCommand())
+		if (s_user_command == menuItems.at(i)->getCommandId())
 		{
-			b_exists = true;
+			exists = true;
 			menuItems.erase(menuItems.begin() + i);
 			cout << ITEM_REMOVED << endl;
 		}
 	}
-	if (b_exists == false)
+	if (exists == false)
 	{
 		cout << DELETING_ERROR << endl;
 	}
@@ -130,23 +130,23 @@ void AddItem::runCommand()
 		cout << OPENING_BRACKET << i << CLOSING_BRACKET << SPACE << parentMenu.getAllCommands().at(i)->getDescription() << endl;
 	}
 	cout << WHICH_COMMAND << endl;
-	int i_command_number = getInteger();
-	while (i_command_number < 0 || i_command_number > parentMenu.getAllCommands().size())
+	int commandNumber = getInteger();
+	while (commandNumber < 0 || commandNumber > parentMenu.getAllCommands().size())
 	{
 		cout << ENTER_PROPER << endl;
-		i_command_number = getInteger();
+		commandNumber = getInteger();
 	}
 
 
-	MenuCommand * c_new_menu_command = new MenuCommand(commandName, commandID);
-	c_new_menu_command->setCommand(parentMenu.getAllCommands().at(i_command_number));
-	parentMenu.addItem(c_new_menu_command);
+	MenuCommand * newMenuCommand = new MenuCommand(commandName, commandID);
+	newMenuCommand->setCommand(parentMenu.getAllCommands().at(commandNumber));
+	parentMenu.addItem(newMenuCommand);
 }
 
 void DeleteItem::runCommand()
 {
-	string s_user_command;
+	string userCommand;
 	cout << ENTER_COMMAND_ID << endl;
-	cin >> s_user_command;
-	parentMenu.deleteItem(s_user_command);
+	cin >> userCommand;
+	parentMenu.deleteItem(userCommand);
 }

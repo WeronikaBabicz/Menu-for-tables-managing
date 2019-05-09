@@ -14,12 +14,12 @@ MenuCommand::~MenuCommand()
 {
 }
 
-string MenuCommand::getName()
+string MenuCommand::getCommandName()
 {
 	return name;
 }
 
-string MenuCommand::getCommand()
+string MenuCommand::getCommandId()
 {
 	return id;
 }

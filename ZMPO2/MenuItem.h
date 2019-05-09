@@ -8,8 +8,8 @@ class MenuItem
 {
 public:
 	virtual void runMenu() = 0;
-	virtual string getName() = 0;
-	virtual string getCommand() = 0;
+	virtual string getCommandName() = 0;
+	virtual string getCommandId() = 0;
 	string getPath();
 	void setPath(string path);
 

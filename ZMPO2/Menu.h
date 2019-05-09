@@ -62,8 +62,8 @@ public:
 	Menu(string name, string id);
 	~Menu();
 	virtual void runMenu();
-	virtual string getName();
-	virtual string getCommand();
+	virtual string getCommandName();
+	virtual string getCommandId();
 	void addItem(MenuItem * menuItem);
 	void deleteItem(string commandID);
 	void setAllCommands(vector<Command*> *allCommands);

@@ -6,8 +6,8 @@ class MenuCommand : public MenuItem
 public:
 	MenuCommand(string name, string id);
 	~MenuCommand();
-	virtual string getName();
-	virtual string getCommand();
+	virtual string getCommandName();
+	virtual string getCommandId();
 	virtual void runMenu();
 	void setCommand(Command * command);
 private:
